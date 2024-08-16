@@ -24,7 +24,7 @@ const Navbar = () => {
     <div
       className={`flex items-center justify-evenly bg-transparent text-white`}
     >
-      <div className=" absolute z-20 mt-32 flex md:w-[78%] lg:w-[78%] items-center justify-between bg-transparent">
+      <div className=" absolute z-30 mt-32 flex md:w-[78%] lg:w-[78%] items-center justify-between bg-transparent">
         <div className="flex items-center space-x-4">
           <Link to="/" className="flex items-center space-x-2">
             <img
