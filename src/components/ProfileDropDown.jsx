@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/logo.png";
+import logo from "../assets/movies-app.png";
 import useOnClickOutside from "../hooks/useOnClickOutside";
 import { CgProfile } from "react-icons/cg";
 import { CiLogout } from "react-icons/ci";
