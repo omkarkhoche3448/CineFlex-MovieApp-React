@@ -1,6 +1,6 @@
 // Navbar.jsx
 import React, { useRef, useState } from "react";
-import logo from "../assets/logo.png";
+import logo from "../assets/movies-app.png";
 import { Link } from "react-router-dom";
 import { HiOutlineBars3 } from "react-icons/hi2";
 import ProfileDropdown from "./ProfileDropDown";
@@ -24,13 +24,13 @@ const Navbar = () => {
     <div
       className={`flex items-center justify-evenly bg-transparent text-white`}
     >
-      <div className="  absolute z-20 mt-32 flex lg:w-[78%] items-center justify-between bg-transparent">
+      <div className=" absolute z-20 mt-32 flex md:w-[78%] lg:w-[78%] items-center justify-between bg-transparent">
         <div className="flex items-center space-x-4">
           <Link to="/" className="flex items-center space-x-2">
             <img
               src={logo}
               alt="Logo"
-              className="h-12 w-12 md:h-16 md:w-16"
+              className="h-8 w-8 lg:h-11 mb-3 lg:w-11  md:h-11 md:w-11"
               loading="lazy"
             />
             <h1 className="text-xl md:text-3xl text-red-400 font-extrabold">
