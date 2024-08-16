@@ -107,14 +107,17 @@ const Home = () => {
         >
           {wallpapers.map((wallpaper, index) => (
             <SwiperSlide key={index}>
-              <div
-                className="swiper-slide w-full h-screen lg:h-[90vh] object-cover filter brightness-56"
-                style={{
-                  backgroundImage: `url(https://image.tmdb.org/t/p/original${wallpaper.backdrop_path})`,
-                  backgroundPosition: "center top 10%",
-                  backgroundSize: "cover",
-                }}
-              ></div>
+              <div className="swiper-slide w-full h-screen lg:h-[90vh] relative">
+
+                <div
+                  className="w-full h-full object-cover filter brightness-56"
+                  style={{
+                    backgroundImage: `url(https://image.tmdb.org/t/p/original${wallpaper.backdrop_path})`,
+                    backgroundPosition: "center top 10%",
+                    backgroundSize: "cover",
+                  }}
+                ></div>
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>
@@ -141,7 +144,7 @@ const Home = () => {
               {wallpapers[currentWallpaper]?.title}
             </h1>
           )}
-          <p className="text-white text-sm md:text-base lg:text-base">
+          <p className="text-gray-200 text-sm md:text-base lg:text-base">
             {wallpapers[currentWallpaper]?.overview.slice(0, 300)}
           </p>
           <div className="flex gap-4">
@@ -156,7 +159,7 @@ const Home = () => {
             </button>
             <Link
               to={`movie/details/${wallpapers[currentWallpaper].id}`}
-              className="flex items-center text-white bg-transparent border border-white text-base lg:text-lg font-bold hover:bg-white hover:text-black hover:bg-opacity-20 px-4 py-2 md:px-6 md:py-3 rounded-lg transition duration-200 ease-in-out"
+              className="flex items-center text-gray-200 bg-transparent border border-white text-base lg:text-lg font-bold hover:bg-white hover:text-black hover:bg-opacity-20 px-4 py-2 md:px-6 md:py-3 rounded-lg transition duration-200 ease-in-out"
             >
               <AiOutlineInfoCircle className="mr-2" />
               More Info
