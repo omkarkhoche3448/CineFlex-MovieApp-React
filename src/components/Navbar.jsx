@@ -53,7 +53,7 @@ const Navbar = () => {
           {showOptions && (
             <div
               ref={optionsRef}
-              className="absolute top-12 right-0 md:top-10 md:right-20 lg:w-48 md:w-40 
+              className="absolute top-12 -left-16 md:top-10 md:right-20 lg:w-40 md:w-40 
               shadow-lg divide-y divide-richblack-800 
               rounded-md border border-richblack-700 bg-richblack-800 overflow-auto z-50"
             >
