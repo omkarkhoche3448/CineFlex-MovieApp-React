@@ -88,13 +88,12 @@ const Home = () => {
             }}
           />
         )}
-        <div className="absolute inset-0 flex justify-end pb-20 md:pb-10 lg:pb-20 z-10 box-sizing: border-box">
-          <div className="w-full lg:w-[30%] h-fit absolute top-[50vh]
-          md:top-[40vh] sm:top-[40vh] lg:left-[37vh] z-10 space-y-6 px-5 md:px-0">
+        <div className=" inset-0 flex justify-end pb-20 md:pb-10 lg:pb-20  box-sizing:border-box">
+          <div className="w-full lg:w-[32%] h-fit absolute top-[50vh] lg:top-[30vh] md:top-[40vh] sm:top-[40vh] lg:left-[25vh] z-10 space-y-6 px-5 md:px-0">
             <h1 className="text-white text-2xl md:text-4xl lg:text-6xl font-bold mb-8">
               {wallpapers?.title}
             </h1>
-            <p className="text-white text-sm md:text-base lg:text-lg">
+            <p className="text-white text-sm md:text-base lg:text-base">
               {wallpapers?.overview}
             </p>
             <div className="flex gap-4 ">
@@ -105,7 +104,10 @@ const Home = () => {
                 <FaPlay className="mr-2 mt-1" />
                 Play
               </button>
-              <Link to={`movie/details/${wallpapers.id}`} className="flex items-center text-black bg-white text-base lg:text-lg font-bold hover:bg-opacity-80 border-none px-4 py-2 md:px-6 md:py-3 rounded-lg transition duration-200 ease-in-out">
+              <Link
+                to={`movie/details/${wallpapers.id}`}
+                className="flex items-center text-white bg-transparent border border-white text-base lg:text-lg font-bold hover:bg-white hover:text-black hover:bg-opacity-20 px-4 py-2 md:px-6 md:py-3 rounded-lg transition duration-200 ease-in-out"
+              >
                 <AiOutlineInfoCircle className="mr-2" />
                 More Info
               </Link>
@@ -115,17 +117,13 @@ const Home = () => {
       </div>
 
       {/* Trending section */}
-      <div className="relative min-h-screen">
-        <div
-          className="w-full h-[33vh] lg:h-screen bg-gradient-to-t from-black to-black/500 
-          p-4 text-center text-xl font-bold absolute bottom-[90%] lg:bottom-[84%] left-0 right-0"
-        > </div>
+      <div className="relative min-h-screen ">
         <div
           className="w-full h-[33vh] lg:h-screen bg-gradient-to-t from-black to-black/500 
           p-4 text-center text-xl font-bold absolute bottom-[90%] lg:bottom-[84%] left-0 right-0"
         > </div>
 
-        <div className="relative z-20 max-w-maxContent mx-auto mt-10  md:mt-32 lg:-mt-32 px-5 lg:px-0">
+        <div className="relative z-20 max-w-maxContent mx-auto md:mt-32 lg:-mt-[170px] px-5 lg:px-0">
           <HighlightText
             text={"What's Trending Today"}
             customeClass={"ml-5 text-2xl lg:text-3xl"}
