@@ -8,7 +8,7 @@ import { HiOutlineRefresh } from 'react-icons/hi';
 import SearchBar from '../components/common/SearchBar';
 
 const Trending = () => {
-    document.title = "MovieFlex | Trending";
+    document.title = "CineFlex| Trending";
 
     const [loading, setLoading] = useState(true);
     const [category, setCategory] = useState("all");

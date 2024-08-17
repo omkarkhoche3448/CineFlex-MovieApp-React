@@ -10,7 +10,7 @@ import { HiOutlineRefresh } from 'react-icons/hi';
 const API_KEY = import.meta.env.VITE_REACT_APP_TOKEN;
 
 function TvShow() {
-    document.title = "MovieFlex | TV Shows";
+    document.title = "CineFlex| TV Shows";
 
     const [shows, setShows] = useState([]);
     const [page, setPage] = useState(1);

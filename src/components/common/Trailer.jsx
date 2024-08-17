@@ -6,8 +6,8 @@ import NotFound from "../../pages/NotFound";
 import { RiCloseFill } from "react-icons/ri";
 
 const Trailer = () => {
-    document.title = " MovieFlex | Trailer"
-    
+    document.title = " CineFlex| Trailer"
+
     const navigate = useNavigate();
     const { pathname } = useLocation();
     const category = pathname.includes("movie") ? "movie" : "tv";
@@ -30,7 +30,7 @@ const Trailer = () => {
 
     useEffect(() => {
         if (ytvideo && ytvideo.name) {
-            document.title = "MovieFlex | " + ytvideo.name;
+            document.title = "CineFlex| " + ytvideo.name;
         }
     }, [ytvideo]);
 
