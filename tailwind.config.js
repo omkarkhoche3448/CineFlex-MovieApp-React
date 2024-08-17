@@ -6,9 +6,7 @@ export default {
   ],
   theme: {
     fontFamily: {
-      inter: ["Inter", "sans-serif"],
-      "edu-sa": ["Edu SA Beginner", "cursive"],
-      mono: ["Roboto Mono", "monospace"],
+      sans: ['Lexend', 'sans-serif'],
     },
     colors: {
       white: "#fff",
