@@ -124,25 +124,23 @@ const Home = () => {
       {/* Gradient Overlay */}
       <div
         className="absolute inset-x-0 lg:bottom-[65%] md:h-[40vh] lg:h-[75vh] 
-      bg-gradient-to-t from-black via-black/70 to-transparent z-10 pointer-events-none"
-      >
-      </div>
+      bg-gradient-to-t from-black via-black/70 to-transparent z-10 pointer-events-none 
+      "
+      ></div>
 
       {/* Movie Details card */}
       <div
-        className="absolute lg:top-[8%] md:top-[7%] w-full lg:w-[25%] h-[40vh] top-[40vh] 
-          sm:top-[40vh] lg:left-[25vh] z-10 "
-      >
+        className="absolute lg:top-[8%] md:top-[7%] w-full lg:w-[22%] h-[40vh] top-[40vh] 
+          sm:top-[40vh] lg:left-[25vh] z-10 ">
         <div className=" items-center h-full flex flex-col justify-between mb-4">
-
           {titleImage ? (
             <img
               src={titleImage}
               loading="lazy"
-              className="w-full lg:h-[50%] mb-2 object-contain scale-95 transition-all duration-300 hover:scale-105"
+              className="w-full lg:h-[60%] mb-2 object-contain scale-100 transition-all duration-300 hover:scale-105"
             />
           ) : (
-            <h1 className="text-white text-2xl md:text-4xl lg:text-5xl font-bold ">
+            <h1 className="text-white tracking-widest font-extrabold text-5xl md:text-4xl lg:text-5xl transition-all duration-300 hover:scale-105 ">
               {wallpapers[currentWallpaper]?.title}
             </h1>
           )}
@@ -151,11 +149,9 @@ const Home = () => {
             <p className="text-gray-200 text-sm font-medium md:text-base lg:text-base mb-2">
               {wallpapers[currentWallpaper]?.overview.slice(0, 150)}
             </p>
-            <p className="text-gray-200 text-xs md:text-sm lg:text-sm ">
-              Release Date: {wallpapers[currentWallpaper]?.release_date}
-            </p>
           </div>
         </div>
+        
         <div className="w-full flex gap-4">
           <button
             className="flex text-black bg-white text-base lg:text-lg font-bold px-4 py-2 md:px-6 md:py-3 rounded-lg hover:bg-opacity-80 border-none transition duration-200 ease-in-out"
@@ -177,7 +173,7 @@ const Home = () => {
       </div>
 
       {/* Trending Content */}
-      <div className="relative w-full z-30 mt-9 md:mt-[70px] lg:-mt-[px] ">
+      <div className="relative w-full z-30 mt-9 md:mt-[70px] lg:-mt-[55px] ">
         <div className="flex flex-col items-center px-5 lg:px-0 space-y-6">
           {/* Trending Section */}
           <div className="w-[80%] flex flex-col">
