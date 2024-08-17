@@ -131,7 +131,7 @@ const Home = () => {
       </div>
 
       {/* Movie Details */}
-      <div className="absolute inset-0 flex justify-end pb-20 md:pb-10 lg:pb-20">
+      <div className=" inset-0 flex justify-end pb-20 md:pb-10 lg:pb-20">
         <div className="w-full lg:w-[32%] h-fit absolute top-[48vh] lg:top-[30vh] md:top-[40vh] sm:top-[40vh] lg:left-[25vh] z-20 space-y-6 px-5 md:px-0">
           {titleImage ? (
             <img
