@@ -45,7 +45,7 @@ To run the app locally, follow these steps:
 
 The app is deployed on Vercel. You can access the live version here:
 
-[https://movie-app-react-two-kappa.vercel.app/](https://movie-app-react-two-kappa.vercel.app/)
+[https://movieflex-movies.vercel.app](https://movieflex-movies.vercel.app)
 
 ## Contributing
 
