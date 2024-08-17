@@ -5,12 +5,13 @@ function Footer() {
   return (
     <div className="w-full bottom-0 mt-5 p-5 bg-black flex flex-col md:flex-row justify-between items-center text-white">
       <div className="flex flex-col items-center md:items-start space-y-4 text-center md:text-left">
-        <h2 className="text-lg font-semibold">👋 Welcome to MovieFlex</h2>
+        <h2 className="text-lg font-semibold">👋 Welcome to CineFlex
+        </h2>
         <p className="text-sm">
           This site does not store any files on our server, we only link to
           media hosted on 3rd party services.
           <br />
-          Copyright © MovieFlex 2024
+          Copyright © CineFlex 2024
         </p>
       </div>
       <div className="flex items-center space-x-4 mt-4 md:mt-0">

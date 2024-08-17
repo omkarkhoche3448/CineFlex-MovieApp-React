@@ -45,10 +45,8 @@ To run the app locally, follow these steps:
 
 The app is deployed on Vercel. You can access the live version here:
 
-[https://movieflex-movies.vercel.app](https://movieflex-movies.vercel.app)
+[https://CineFlex-movies.vercel.app](https://CineFlex-movies.vercel.app)
 
 ## Contributing
 
 Feel free to open issues or submit pull requests if you have suggestions for improvements or features.
-
-

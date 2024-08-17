@@ -33,8 +33,8 @@ const Navbar = () => {
               className="h-8 w-8 lg:h-11 mb-3 lg:w-11  md:h-11 md:w-11"
               loading="lazy"
             />
-            <h1 className="text-xl md:text-3xl text-red-400 font-extrabold">
-              MovieFlex
+            <h1 className="text-xl md:text-3xl text-red-600 font-extrabold">
+              CineFlex
             </h1>
           </Link>
         </div>
