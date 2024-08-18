@@ -5,9 +5,6 @@ import playIcon from "../../assets/icon-play.png";
 import { TbArrowBigUpLine } from "react-icons/tb";
 
 const Cards = ({ data, title }) => {
-  console.log("data of cards ", data);
-  console.log("Title of cards ", title);
-
   return (
     <div
       className="flex flex-wrap w-[90%] mx-auto h-full justify-center mt-10

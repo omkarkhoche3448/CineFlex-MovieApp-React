@@ -62,10 +62,12 @@ const SearchBar = ({ query, setQuery, setSearchResults }) => {
               <img
                 src={
                   s.backdrop_path || s.profile_path
-                    ? `https://image.tmdb.org/t/p/original/${s.backdrop_path || s.profile_path}`
+                    ? `https://image.tmdb.org/t/p/original/${
+                        s.backdrop_path || s.profile_path
+                      }`
                     : noimage
                 }
-                alt=""
+                alt={s.name || s.title || s.original_name || s.original_title}
                 className="h-16 w-16 object-cover rounded-sm mr-3"
               />
               <span className="text-white">

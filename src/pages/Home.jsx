@@ -11,6 +11,7 @@ import { AiOutlineInfoCircle } from "react-icons/ai";
 import HorizontalCards from "../components/HorizontalCards";
 import HighlightText from "../components/common/HighlightText";
 import Footer from "../components/common/Footer";
+import Tutorial from "../components/common/Tutorial";
 
 const Home = () => {
   document.title = "CineFlex | Home";
@@ -22,6 +23,7 @@ const Home = () => {
   const [trending, setTrending] = useState(null);
   const [upcoming, setUpcoming] = useState([]);
   const [topRated, setTopRated] = useState([]);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const getNowPlayingWallpapers = async () => {
@@ -96,9 +98,16 @@ const Home = () => {
 
   return !loading && wallpapers.length > 0 && trending ? (
     <div className="relative min-h-screen">
+      {error && <p className="text-red-500">{error}</p>}
+      <Tutorial />
+
       {/* Swiper Container */}
       <Swiper
         modules={[Autoplay]}
+        autoplay={{
+          delay: 8000,
+          disableOnInteraction: true,
+        }}
         loop
         onSlideChange={handleSlideChange}
         speed={300}
@@ -120,14 +129,12 @@ const Home = () => {
         ))}
       </Swiper>
 
-      {/* Gradient Overlay */}
       <div
         className="absolute inset-x-0 lg:bottom-[65%] md:h-[40vh] lg:h-[75vh] 
       bg-gradient-to-t from-black via-black/70 to-transparent z-10 pointer-events-none 
       "
       ></div>
 
-      {/* Movie Details card */}
       <div
         className="absolute lg:top-[8%] md:top-[7%] w-full lg:w-[22%] h-[40vh] top-[40vh] 
           sm:top-[40vh] lg:left-[25vh] z-10 px-4 lg:px-0 pointer-events-none"
@@ -174,10 +181,8 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Trending Content */}
       <div className="relative w-full z-30 mt-9 md:mt-[70px] lg:-mt-[55px] ">
         <div className="flex flex-col items-center space-y-4">
-          {/* Trending Section */}
           <div className="w-[80%] flex flex-col">
             <HighlightText
               text={"What's Trending Today"}
@@ -186,7 +191,6 @@ const Home = () => {
             <HorizontalCards data={trending} title={"movie"} />
           </div>
 
-          {/* Top Rated Section */}
           <div className="w-[80%] flex flex-col">
             <HighlightText
               text={"Top Rated Movies"}
@@ -195,7 +199,6 @@ const Home = () => {
             <HorizontalCards data={topRated} title={"movie"} />
           </div>
 
-          {/* Upcoming Section */}
           <div className="w-[80%] flex flex-col">
             <HighlightText
               text={"Upcoming Movies"}

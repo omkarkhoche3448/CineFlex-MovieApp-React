@@ -36,6 +36,7 @@ const Cast = ({ cast, createdBy }) => {
             <div className="w-[100px] h-[100px] rounded-full overflow-hidden shadow-lg">
               <img
                 className="w-full h-full object-cover object-center"
+                loading="lazy"
                 src={
                   member.profile_path === NoImg
                     ? NoImg
@@ -76,6 +77,7 @@ const Cast = ({ cast, createdBy }) => {
                 <div className="w-[100px] h-[100px] rounded-full overflow-hidden shadow-lg">
                   <img
                     className="w-full h-full object-cover object-center"
+                    loading="lazy"
                     src={
                       creator.profile_path === NoImg
                         ? NoImg

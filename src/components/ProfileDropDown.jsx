@@ -21,7 +21,12 @@ const ProfileDropdown = () => {
         onClick={handleToggle}
         className="flex items-center justify-center h-10 w-10 rounded-full bg-richblack-600 focus:outline-none"
       >
-        <img className="h-8 w-8 rounded-full" src={logo} alt="Profile" />
+        <img
+          className="h-8 w-8 rounded-full"
+          src={logo}
+          alt="Profile"
+          loading="lazy"
+        />
       </button>
       {isOpen && (
         <div className="absolute right-0 mt-1 w-48 py-2 bg-richblack-800 rounded-lg shadow-xl">

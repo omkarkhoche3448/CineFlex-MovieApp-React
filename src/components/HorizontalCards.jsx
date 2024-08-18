@@ -16,6 +16,7 @@ const HorizontalCards = ({ data, title }) => {
             <div className="relative group h-[70%] md:h-[75%] lg:h-[80%] mb-2 transform transition-transform duration-300 hover:scale-105">
               <img
                 className="w-full h-full object-cover rounded-md"
+                loading="lazy"
                 src={
                   d.poster_path || d.backdrop_path
                     ? `https://image.tmdb.org/t/p/original${
@@ -29,7 +30,12 @@ const HorizontalCards = ({ data, title }) => {
                 className="absolute inset-0 flex items-center justify-center opacity-0 
               group-hover:opacity-100 transition-opacity duration-400 bg-gray-900 bg-opacity-60"
               >
-                <img src={playIcon} alt="Play Icon" className="h-10 w-10" />
+                <img
+                  src={playIcon}
+                  alt="Play Icon"
+                  className="h-10 w-10"
+                  loading="lazy"
+                />
               </div>
             </div>
 
