@@ -13,7 +13,7 @@ import HighlightText from "../components/common/HighlightText";
 import Footer from "../components/common/Footer";
 
 const Home = () => {
-  document.title = "MovieApp | Home";
+  document.title = "CineFlex | Home";
 
   const [wallpapers, setWallpapers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -39,7 +39,8 @@ const Home = () => {
     try {
       const { data } = await axios.get(`/movie/${movieId}/images`);
       const images = data.logos || data.posters || data.backdrops;
-      const titleImg = images.find(image => image.iso_639_1 === 'en') || images[0];
+      const titleImg =
+        images.find((image) => image.iso_639_1 === "en") || images[0];
       return `https://image.tmdb.org/t/p/original${titleImg.file_path}`;
     } catch (error) {
       console.log("Error: ", error);
@@ -95,7 +96,6 @@ const Home = () => {
 
   return !loading && wallpapers.length > 0 && trending ? (
     <div className="relative min-h-screen">
-
       {/* Swiper Container */}
       <Swiper
         modules={[Autoplay]}
@@ -107,7 +107,6 @@ const Home = () => {
         {wallpapers.map((wallpaper, index) => (
           <SwiperSlide key={index}>
             <div className="swiper-slide w-full h-screen lg:h-[90vh] relative">
-
               <div
                 className="w-full h-full object-cover filter brightness-56"
                 style={{
@@ -131,13 +130,14 @@ const Home = () => {
       {/* Movie Details card */}
       <div
         className="absolute lg:top-[8%] md:top-[7%] w-full lg:w-[22%] h-[40vh] top-[40vh] 
-          sm:top-[40vh] lg:left-[25vh] z-10 ">
-        <div className=" items-center h-full flex flex-col justify-between mb-4">
+          sm:top-[40vh] lg:left-[25vh] z-10 px-4 lg:px-0 pointer-events-none"
+      >
+        <div className=" items-center h-full flex flex-col justify-center space-y-4 md:justify-between lg:justify-between lg:mb-4">
           {titleImage ? (
             <img
               src={titleImage}
               loading="lazy"
-              className="w-full lg:h-[60%] mb-2 object-contain scale-100 transition-all duration-300 hover:scale-105"
+              className="w-full pointer-events-auto h-[60%] md:h-[60%] lg:h-[60%] mb-2 object-contain scale-100 transition-all duration-300 hover:scale-105"
             />
           ) : (
             <h1 className="text-white tracking-widest font-extrabold text-5xl md:text-4xl lg:text-5xl transition-all duration-300 hover:scale-105 ">
@@ -145,18 +145,20 @@ const Home = () => {
             </h1>
           )}
 
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 ">
             <p className="text-gray-200 text-sm font-medium md:text-base lg:text-base mb-2">
               {wallpapers[currentWallpaper]?.overview.slice(0, 150)}
             </p>
           </div>
         </div>
-        
-        <div className="w-full flex gap-4">
+
+        <div className="w-full flex items-center md:mt-[10%] gap-4">
           <button
-            className="flex text-black bg-white text-base lg:text-lg font-bold px-4 py-2 md:px-6 md:py-3 rounded-lg hover:bg-opacity-80 border-none transition duration-200 ease-in-out"
+            className="flex pointer-events-auto text-black bg-white text-base lg:text-lg font-bold px-4 py-2 md:px-6 md:py-3 rounded-lg hover:bg-opacity-80 border-none transition duration-200 ease-in-out"
             onClick={() =>
-              navigate(`movie/details/${wallpapers[currentWallpaper].id}/trailer`)
+              navigate(
+                `movie/details/${wallpapers[currentWallpaper].id}/trailer`
+              )
             }
           >
             <FaPlay className="mr-2 mt-1" />
@@ -164,7 +166,7 @@ const Home = () => {
           </button>
           <Link
             to={`movie/details/${wallpapers[currentWallpaper].id}`}
-            className="flex items-center text-gray-200 bg-transparent border border-white text-base lg:text-lg font-bold hover:bg-white hover:text-black hover:bg-opacity-20 px-4 py-2 md:px-6 md:py-3 rounded-lg transition duration-200 ease-in-out"
+            className="flex pointer-events-auto items-center text-gray-200 bg-transparent border border-white text-base lg:text-lg font-bold hover:bg-white hover:text-black hover:bg-opacity-20 px-4 py-2 md:px-6 md:py-3 rounded-lg transition duration-200 ease-in-out whitespace-nowrap"
           >
             <AiOutlineInfoCircle className="mr-2" />
             More Info
@@ -174,12 +176,12 @@ const Home = () => {
 
       {/* Trending Content */}
       <div className="relative w-full z-30 mt-9 md:mt-[70px] lg:-mt-[55px] ">
-        <div className="flex flex-col items-center px-5 lg:px-0 space-y-6">
+        <div className="flex flex-col items-center space-y-4">
           {/* Trending Section */}
           <div className="w-[80%] flex flex-col">
             <HighlightText
               text={"What's Trending Today"}
-              customeClass={"ml-5 text-2xl lg:text-3xl"}
+              customeClass={"ml-3 text-2xl lg:text-3xl"}
             />
             <HorizontalCards data={trending} title={"movie"} />
           </div>
@@ -188,7 +190,7 @@ const Home = () => {
           <div className="w-[80%] flex flex-col">
             <HighlightText
               text={"Top Rated Movies"}
-              customeClass={"ml-5 text-2xl lg:text-3xl"}
+              customeClass={"ml-3 text-2xl lg:text-3xl"}
             />
             <HorizontalCards data={topRated} title={"movie"} />
           </div>
@@ -197,13 +199,12 @@ const Home = () => {
           <div className="w-[80%] flex flex-col">
             <HighlightText
               text={"Upcoming Movies"}
-              customeClass={"ml-5 text-2xl lg:text-3xl"}
+              customeClass={"ml-3 text-2xl lg:text-3xl"}
             />
             <HorizontalCards data={upcoming} title={"movie"} />
           </div>
         </div>
       </div>
-
       <Footer />
     </div>
   ) : (
