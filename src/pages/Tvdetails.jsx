@@ -74,12 +74,14 @@ function Tvdetails() {
               info.detail.poster_path || info.detail.backdrop_path
             }`}
             alt={info.detail.title || "Tv Poster"}
+            loading="lazy"
           />
 
           <div className="w-full lg:w-[40%] space-y-3 z-30">
             {titleImage ? (
               <img
-                className="text-3xl lg:text-4xl font-black object-contain text-gray-200 lazyy-load"
+                className="text-3xl lg:text-4xl font-black object-contain text-gray-200"
+                loading="lazy"
                 src={titleImage}
                 alt={info.detail.title || "Movie Title Image"}
                 style={{
@@ -146,6 +148,7 @@ function Tvdetails() {
                       className="w-[6vh] h-[6vh] object-cover rounded-md"
                       src={`https://image.tmdb.org/t/p/original/${w.logo_path}`}
                       alt={w.provider_name}
+                      loading="lazy"
                     />
                   ))}
                 </div>
