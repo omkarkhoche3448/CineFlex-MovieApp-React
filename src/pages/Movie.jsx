@@ -10,7 +10,7 @@ import { HiOutlineRefresh } from "react-icons/hi";
 const API_KEY = import.meta.env.VITE_REACT_APP_TOKEN;
 
 function Movie() {
-  document.title = "MovieFlex | Movies";
+  document.title = "CineFlex | Movies";
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
@@ -67,6 +67,7 @@ function Movie() {
       });
 
       setGenres(response.data.genres);
+      console.log("fetchGenres", response.data);
     } catch (error) {
       console.error("Failed to fetch genres", error);
     }
@@ -109,54 +110,52 @@ function Movie() {
       <Loader />
     </div>
   ) : (
-    <div className="w-full mx-auto px-4 mt-32">
-      <div className="max-w-full flex flex-col justify-center lg:flex-row lg:space-x-4 lg:space-y-0 space-y-4  overflow-x-hidden">
-        <DropDown
-          key={`category-${resetKey}`}
-          title="Categories"
-          options={[
-            { id: "movie", name: "Movies" },
-            { id: "tv", name: "TV Shows" },
-          ]}
-          func={onCategoryChange}
-          defaultValue={{ id: "movie", name: "Movies" }}
-          className="flex-shrink-0 w-full lg:w-auto"
-        />
-        <DropDown
-          key={`genres-${resetKey}`}
-          title="Genres"
-          options={genres}
-          func={onGenresChange}
-          defaultValue="0"
-          className="flex-shrink-0 w-full lg:w-auto"
-        />
-        <DropDown
-          key={`year-${resetKey}`}
-          title="Year"
-          options={YEARS.map((year) => ({ id: year, name: year.toString() }))}
-          func={onYearChange}
-          defaultValue={new Date().getFullYear().toString()}
-          className="flex-shrink-0 w-full lg:w-auto"
-        />
+    <>
+      <div className="w-full max-w-screen-xl mx-auto px-4">
+        <div className="w-full flex flex-col lg:flex-row md:w-[70%] lg:w-[80%] xl:w-[60%] lg:p-4 space-y-5 lg:space-y-0 lg:space-x-5 mx-auto mt-28">
+          <DropDown
+            key={`category-${resetKey}`}
+            title="Categories"
+            options={[
+              { id: "movie", name: "Movies" },
+              { id: "tv", name: "TV Shows" },
+            ]}
+            func={onCategoryChange}
+            defaultValue={{ id: "movie", name: "Movies" }}
+          />
+          <DropDown
+            key={`genres-${resetKey}`}
+            title="Genres"
+            options={genres}
+            func={onGenresChange}
+            defaultValue="0"
+          />
+          <DropDown
+            key={`year-${resetKey}`}
+            title="Year"
+            options={YEARS.map((year) => ({ id: year, name: year.toString() }))}
+            func={onYearChange}
+            defaultValue={new Date().getFullYear().toString()}
+          />
+          <button
+            className="bg-red-400 text-white px-4 py-2 rounded mt-5 lg:mt-0 flex items-center"
+            onClick={handleReset}
+          >
+            <HiOutlineRefresh className="inline-block w-5 h-5 mr-2" />
+            Reset
+          </button>
+        </div>
 
-        <button
-          className="bg-red-400 text-white px-4 py-2 rounded flex-shrink-0 w-full lg:w-auto"
-          onClick={handleReset}
+        <InfiniteScroll
+          dataLength={movies.length}
+          next={() => setPage(page + 1)}
+          hasMore={hasMore}
+          loader={<Loader />}
         >
-          <HiOutlineRefresh className="inline-block w-5 h-5 mr-2" />
-          Reset
-        </button>
+          <Cards data={movies} title={"movie"} />
+        </InfiniteScroll>
       </div>
-
-      <InfiniteScroll
-        dataLength={movies.length}
-        next={() => setPage(page + 1)}
-        hasMore={hasMore}
-        loader={<Loader />}
-      >
-        <Cards data={movies} title={"movie"} />
-      </InfiniteScroll>
-    </div>
+    </>
   );
 }
 
