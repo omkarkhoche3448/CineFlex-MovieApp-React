@@ -4,7 +4,7 @@ import { asyncloadmovie, removeMovie } from "../services/movieAction";
 import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import HorizontalCards from "../components/HorizontalCards";
 import HighlightText from "../components/common/HighlightText";
-import { FaPlay, FaStar } from "react-icons/fa";
+import CardDetails from "../components/common/CardDetails";
 import Cast from "../components/common/Cast";
 import axios from "../utils/axios";
 
@@ -78,94 +78,15 @@ function Moviedetails() {
             loading="lazy"
           />
 
-          <div className="w-full lg:w-[40%] space-y-3 z-30">
-            {titleImage ? (
-              <img
-                className="text-3xl lg:text-4xl font-black object-contain text-gray-200 lazyy-load"
-                src={titleImage}
-                alt={info.detail.title || "Movie Title Image"}
-                loading="lazy"
-                style={{
-                  maxWidth: "50%",
-                  height: "auto",
-                  display: "block",
-                  marginLeft: "0",
-                  marginRight: "0",
-                }}
-              />
-            ) : (
-              <h1 className="text-3xl lg:text-4xl font-black text-gray-200">
-                {info.detail.name ||
-                  info.detail.title ||
-                  info.detail.original_name ||
-                  info.detail.original_title}
-              </h1>
-            )}
-
-            <div className="flex flex-col lg:flex-row gap-x-3">
-              <div className="flex items-center gap-x-2">
-                <FaStar className="h-5 w-5 text-yellow-100" />
-                <span className="rounded-full text-base font-semibold text-gray-200 w-12 h-12 flex justify-center items-center">
-                  {info.detail.vote_average.toFixed(1)}
-                </span>
-                <small className="text-base lg:text-lg font-bold bg-opacity-50 text-gray-200">
-                  {info.detail.release_date.split("-")[0]}
-                </small>
-              </div>
-
-              <div className="flex items-center text-base lg:text-lg gap-y-2 gap-x-2 flex-wrap">
-                {info.detail.genres.map((g, index) => (
-                  <span
-                    key={g.id}
-                    className={`rounded-full font-semibold px-1 py-1 bg-yellow-500 bg-opacity-70 text-gray-900`}
-                  >
-                    {g.name}
-                  </span>
-                ))}
-                <span className="rounded-full text-base lg:text-lg font-semibold px-1 py-1 bg-caribbeangreen-500 bg-opacity-70 text-gray-900">
-                  {info.detail.runtime} min
-                </span>
-              </div>
-            </div>
-
-            <h1 className="text-xl lg:text-2xl font-semibold italic text-gray-200">
-              {info.detail.tagline}
-            </h1>
-
-            <p className="text-base lg:text-lg text-gray-200">
-              {info.detail.overview.length < 146
-                ? info.detail.overview
-                : info.detail.overview.slice(0, 146) + "."}
-            </p>
-
-            <div className="w-[80%] flex flex-wrap p-3">
-              {info.watchproviders && info.watchproviders.flatrate && (
-                <div className="flex space-x-4 items-center text-white">
-                  {info.watchproviders.flatrate.map((w, i) => (
-                    <img
-                      key={i}
-                      title={w.provider_name}
-                      className="w-[6vh] h-[6vh] object-cover rounded-md"
-                      src={`https://image.tmdb.org/t/p/original/${w.logo_path}`}
-                      alt={w.provider_name}
-                      loading="lazy"
-                    />
-                  ))}
-                </div>
-              )}
-            </div>
-
-            <button
-              className="flex items-center text-black bg-white text-base lg:text-lg font-bold md:px-6 md:py-3 rounded-lg hover:bg-opacity-80 border-none transition duration-200 ease-in-out"
-              onClick={() => navigate(`${pathname}/trailer`)}
-            >
-              <FaPlay className="mr-2" />
-              Play Trailer
-            </button>
-          </div>
+          <CardDetails
+            info={info}
+            titleImage={titleImage}
+            navigate={navigate}
+            pathname={pathname}
+          />
         </div>
 
-        <div className="relative w-full mt-9 md:mt-[70px] bg-black">
+        <div className="relative w-full md:mt-[70px] bg-black">
           <div className="absolute inset-x-0 lg:bottom-[90%] md:h-[40vh] lg:h-[75vh] lg:block md:block hidden bg-gradient-to-t from-black via-black/70 to-transparent z-10 pointer-events-none"></div>
           <div className="absolute inset-x-0 -top-[15%] h-[44vh] lg:hidden md:hidden block bg-gradient-to-t from-black via-black to-transparent z-10 pointer-events-none"></div>
           <div className="max-w-[100%] flex flex-col items-center space-y-4">

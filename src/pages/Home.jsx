@@ -144,7 +144,7 @@ const Home = () => {
             <img
               src={titleImage}
               loading="lazy"
-              className="w-full pointer-events-auto h-[60%] md:h-[60%] lg:h-[60%] mb-2 object-contain scale-100 transition-all duration-300 hover:scale-105"
+              className="w-full pointer-events-none md:pointer-events-auto lg:pointer-events-auto h-[60%] md:h-[60%] lg:h-[60%] mb-2 object-contain scale-100 transition-all duration-300 hover:scale-105"
             />
           ) : (
             <h1 className="text-white tracking-widest font-extrabold text-5xl md:text-4xl lg:text-5xl transition-all duration-300 hover:scale-105 ">
@@ -173,7 +173,8 @@ const Home = () => {
           </button>
           <Link
             to={`movie/details/${wallpapers[currentWallpaper].id}`}
-            className="flex pointer-events-auto items-center text-gray-200 bg-transparent border border-white text-base lg:text-lg font-bold hover:bg-white hover:text-black hover:bg-opacity-20 px-4 py-2 md:px-6 md:py-3 rounded-lg transition duration-200 ease-in-out whitespace-nowrap"
+            className="flex pointer-events-auto items-center text-gray-200 bg-transparent border border-white
+             text-base lg:text-lg font-bold hover:bg-white hover:text-white hover:bg-opacity-20 px-4 py-2 md:px-6 md:py-3 rounded-lg transition duration-200 ease-in-out whitespace-nowrap"
           >
             <AiOutlineInfoCircle className="mr-2" />
             More Info

@@ -7,9 +7,10 @@ import HighlightText from "../components/common/HighlightText";
 import { FaPlay, FaStar } from "react-icons/fa";
 import Cast from "../components/common/Cast";
 import axios from "../utils/axios";
+import CardDetails from "../components/common/CardDetails";
 
 function Tvdetails() {
-  document.title = "CineFlex | Tv Show Details";
+  document.title = "CineFlex | Tv Details ";
 
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -64,10 +65,10 @@ function Tvdetails() {
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
       }}
-      className=" relative max-w-full min-h-screen h-fit object-cover filter brightness-56 "
+      className="relative max-w-full min-h-screen h-fit object-cover filter brightness-56"
     >
       <div className="w-full h-screen lg:h-[90vh] mx-auto flex flex-col mt-32">
-        <div className="w-[80%] mx-auto flex flex-col lg:flex-row justify-center mt-32 lg:space-y-0 lg:space-x-44 ">
+        <div className="w-[80%] mx-auto flex flex-col lg:flex-row justify-center mt-32 lg:space-y-0 lg:space-x-44">
           <img
             className="shadow-[8px_17px_38px_2px_rgba(0,0,0,.5)] h-[50vh] lg:h-[50vh] object-contain rounded-md static z-20 mb-5 lg:mb-0"
             src={`https://image.tmdb.org/t/p/original/${
@@ -77,93 +78,12 @@ function Tvdetails() {
             loading="lazy"
           />
 
-          <div className="w-full lg:w-[40%] space-y-3 z-30">
-            {titleImage ? (
-              <img
-                className="text-3xl lg:text-4xl font-black object-contain text-gray-200"
-                loading="lazy"
-                src={titleImage}
-                alt={info.detail.title || "Movie Title Image"}
-                style={{
-                  maxWidth: "50%",
-                  height: "auto",
-                  display: "block",
-                  marginLeft: "0",
-                  marginRight: "0",
-                }}
-              />
-            ) : (
-              <h1 className="text-3xl lg:text-4xl font-black text-gray-200">
-                {info.detail.name ||
-                  info.detail.title ||
-                  info.detail.original_name ||
-                  info.detail.original_title}
-              </h1>
-            )}
-
-            <div className=" flex flex-col lg:flex-row gap-x-3">
-              <div className="flex items-center gap-x-2">
-                <FaStar className="h-5 w-5 text-yellow-100" />
-                <span className="rounded-full text-base font-semibold text-gray-200 w-12 h-12 flex justify-center items-center">
-                  {info.detail.vote_average.toFixed(1)}
-                </span>
-                <small className="text-base lg:text-lg font-bold bg-opacity-50 text-gray-200">
-                  {info.detail.first_air_date.split("-")[0]}
-                </small>
-              </div>
-
-              <div className="flex items-center text-base lg:text-lg gap-y-2 gap-x-2 flex-wrap">
-                {info.detail.genres.map((g, index) => (
-                  <span
-                    key={g.id}
-                    className={`rounded-full font-semibold px-1 py-1 bg-yellow-500 bg-opacity-70 text-gray-900`}
-                  >
-                    {g.name}
-                  </span>
-                ))}
-
-                <span className="rounded-full text-base lg:text-lg font-semibold px-1 py-1 bg-caribbeangreen-500 bg-opacity-70 text-gray-900">
-                  {info.detail.episode_run_time[0]} min
-                </span>
-              </div>
-            </div>
-
-            <h1 className="text-xl lg:text-2xl font-semibold italic text-gray-200">
-              {info.detail.tagline}
-            </h1>
-
-            <p className="text-base lg:text-lg text-gray-200">
-              {info.detail.overview.length < 146
-                ? info.detail.overview
-                : info.detail.overview.slice(0, 146) + "."}
-            </p>
-
-            <div className="w-[80%] flex flex-wrap p-3">
-              {info.watchproviders && info.watchproviders.flatrate && (
-                <div className="flex space-x-4 items-center text-white">
-                  {info.watchproviders.flatrate.map((w, i) => (
-                    <img
-                      key={i}
-                      title={w.provider_name}
-                      className="w-[6vh] h-[6vh] object-cover rounded-md"
-                      src={`https://image.tmdb.org/t/p/original/${w.logo_path}`}
-                      alt={w.provider_name}
-                      loading="lazy"
-                    />
-                  ))}
-                </div>
-              )}
-            </div>
-
-            <button
-              className="flex items-center text-black bg-white text-base lg:text-lg  font-bold  
-                md:px-6 md:py-3 rounded-lg hover:bg-opacity-80 border-none transition duration-200 ease-in-out"
-              onClick={() => navigate(`${pathname}/trailer`)}
-            >
-              <FaPlay className="mr-2 " />
-              Play Trailer
-            </button>
-          </div>
+          <CardDetails
+            info={info}
+            titleImage={titleImage}
+            pathname={pathname}
+            navigate={navigate}
+          />
         </div>
 
         <div className="relative w-full mt-9 md:mt-[70px] bg-black">
@@ -173,7 +93,7 @@ function Tvdetails() {
           ></div>
 
           <div
-            className="absolute inset-x-0 -top-[30%] h-[33vh] lg:bottom-[90%] md:h-[40vh] lg:h-[75vh] lg:hidden md:hidden block
+            className="absolute inset-x-0 -top-[24%] h-[33vh] lg:bottom-[90%] md:h-[40vh] lg:h-[75vh] lg:hidden md:hidden block
               bg-gradient-to-t from-black via-black/80 to-transparent z-10 pointer-events-none"
           ></div>
 

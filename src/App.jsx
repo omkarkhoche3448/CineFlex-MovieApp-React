@@ -1,14 +1,17 @@
 import { Route, Routes } from "react-router-dom";
+import ProtectedRoute from "./pages/ProtectedRoute";
+import SignInPage from "./pages/SignInPage";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import Trending from "./pages/Trending";
-import Movie from "./pages/Movie"
+import Movie from "./pages/Movie";
 import TvShow from "./pages/TvShow";
 import Search from "./pages/Search";
 import Navbar from "./components/Navbar";
 import Moviedetails from "./pages/Moviedetails";
 import Trailer from "./components/common/Trailer";
 import Tvdetails from "./pages/Tvdetails";
+import WishList from "./pages/WishList";
 
 function App() {
   return (
@@ -19,28 +22,26 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/search" element={<Search />} />
-
           <Route path="/trending" element={<Trending />} />
-
           <Route path="/movie" element={<Movie />} />
           <Route path="/movie/details/:id" element={<Moviedetails />}>
-            <Route
-              path="/movie/details/:id/trailer"
-              element={<Trailer />}
-            />
+            <Route path="/movie/details/:id/trailer" element={<Trailer />} />
           </Route>
-
           <Route path="/tvshow" element={<TvShow />} />
           <Route path="/tv/details/:id" element={<Tvdetails />}>
-            <Route
-              path="/tv/details/:id/trailer"
-              element={<Trailer />}
-            />
+            <Route path="/tv/details/:id/trailer" element={<Trailer />} />
           </Route>
-
+          <Route
+            path="/wishlist"
+            element={
+              <ProtectedRoute>
+                <WishList />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/sign-in" element={<SignInPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-
       </div>
     </>
   );

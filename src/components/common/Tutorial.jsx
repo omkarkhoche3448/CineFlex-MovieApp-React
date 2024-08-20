@@ -17,7 +17,7 @@ const Tutorial = () => {
 
   return (
     showTutorial && (
-      <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center z-50">
+      <div className="fixed pointer-events-none top-0 left-0 w-full h-full flex justify-center items-center z-50">
         <motion.div
           className="absolute"
           initial={{ x: 0 }}
