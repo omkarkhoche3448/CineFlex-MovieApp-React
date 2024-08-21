@@ -18,6 +18,7 @@ const wishlistSlice = createSlice({
       localStorage.setItem('wishlist', JSON.stringify(updatedWishlist));
       return updatedWishlist;
     },
+    
     setWishlist: (state, action) => {
       return action.payload;
     },

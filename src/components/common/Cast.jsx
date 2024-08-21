@@ -2,14 +2,12 @@ import React from "react";
 import NoImg from "../../assets/boy.png";
 
 const Cast = ({ cast, createdBy }) => {
-  // Ensure cast is defined and filter members with profile images, limiting to 13
   const castWithImages = (
     cast && Array.isArray(cast)
       ? cast.filter((member) => member.profile_path)
       : []
   ).slice(0, 13);
 
-  // Ensure createdBy is defined and filter creators with profile images, limiting to 13
   const creatorsWithImages = (
     createdBy && Array.isArray(createdBy)
       ? createdBy.filter((creator) => creator.profile_path)

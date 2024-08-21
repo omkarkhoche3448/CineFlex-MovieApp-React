@@ -1,13 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaStar, FaPlay, FaPlus, FaCheck } from "react-icons/fa";
 import { useUser } from "@clerk/clerk-react";
+import { useDispatch, useSelector } from "react-redux";
+import { addToWishlist, removeFromWishlist } from "../../slices/wishlistSlice";
 
 function CardDetails({ info, titleImage, navigate, pathname }) {
   const { isSignedIn } = useUser();
+  const dispatch = useDispatch();
+  const wishlist = useSelector((state) => state.wishlist);
   const [addedToWishlist, setAddedToWishlist] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
 
-  if (!info || !info.detail) {
+  useEffect(() => {
+    if (info?.detail) {
+      setAddedToWishlist(wishlist.some((item) => item.id === info.detail.id));
+    }
+  }, [wishlist, info]);
+
+  if (!info?.detail) {
     return null;
   }
 
@@ -20,11 +30,15 @@ function CardDetails({ info, titleImage, navigate, pathname }) {
     info.detail.original_name ||
     info.detail.original_title;
 
-  const handleAddToWishlist = () => {
+  const handleWishlistToggle = () => {
     if (!isSignedIn) {
-      navigate("/sign-in");
+      navigate("/sign-in?redirectUrl=/wishlist");
     } else {
-      setAddedToWishlist(true);
+      if (addedToWishlist) {
+        dispatch(removeFromWishlist(info.detail.id));
+      } else {
+        dispatch(addToWishlist(info.detail));
+      }
     }
   };
 
@@ -32,7 +46,7 @@ function CardDetails({ info, titleImage, navigate, pathname }) {
     <div className="w-full lg:w-[40%] space-y-3 z-30">
       {titleImage ? (
         <img
-          className="text-3xl lg:text-4xl font-black object-contain text-gray-200"
+          className="object-contain"
           loading="lazy"
           src={titleImage}
           alt={title}
@@ -40,8 +54,6 @@ function CardDetails({ info, titleImage, navigate, pathname }) {
             maxWidth: "50%",
             height: "auto",
             display: "block",
-            marginLeft: "0",
-            marginRight: "0",
           }}
         />
       ) : (
@@ -85,7 +97,7 @@ function CardDetails({ info, titleImage, navigate, pathname }) {
       <p className="text-base lg:text-lg text-gray-200">
         {info.detail.overview.length < 146
           ? info.detail.overview
-          : info.detail.overview.slice(0, 146) + "."}
+          : info.detail.overview.slice(0, 146) + "..."}
       </p>
 
       <div className="w-[80%] flex flex-wrap p-3">
@@ -104,7 +116,7 @@ function CardDetails({ info, titleImage, navigate, pathname }) {
         )}
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-4">
+      <div className="flex flex-col lg:flex-row gap-4 ">
         <button
           className="flex items-center justify-center text-black bg-white text-base lg:text-lg font-bold px-6 py-3 rounded-lg hover:bg-opacity-80 border-none transition duration-200 ease-in-out"
           onClick={() => navigate(`${pathname}/trailer`)}
@@ -120,10 +132,9 @@ function CardDetails({ info, titleImage, navigate, pathname }) {
                 ? "bg-green-600 hover:bg-green-500"
                 : "bg-red-600 hover:bg-red-500"
             } text-base lg:text-lg font-bold px-4 py-3 rounded-lg transition duration-200 ease-in-out`}
-            onClick={handleAddToWishlist}
+            onClick={handleWishlistToggle}
             onMouseEnter={() => !isSignedIn && setShowTooltip(true)}
             onMouseLeave={() => setShowTooltip(false)}
-            disabled={addedToWishlist}
           >
             {addedToWishlist ? (
               <>
@@ -133,21 +144,20 @@ function CardDetails({ info, titleImage, navigate, pathname }) {
             ) : (
               <>
                 <FaPlus className="mr-2" />
-                Add to Wish List
+                Add to Wishlist
               </>
             )}
           </button>
-          {/* {!isSignedIn && showTooltip && (
+          {!isSignedIn && showTooltip && (
             <div
-              className="absolute  bg-gray-800 text-white p-3 rounded-lg shadow-lg bottom-14 left-[100%] transform -translate-x-1/2 mb-2 whitespace-nowrap text-sm 
-             sm:max-w-xs md:max-w-md max-w-xs lg:max-w-lg"
+              className="absolute bg-gray-800 bg-opacity-50 text-white text-sm md:text-base p-3 rounded-lg shadow-lg 
+            bottom-16 left-1/2 transform -translate-x-1/2 whitespace-nowrap "
             >
               <p className="text-center">
-                You need to log in to add items to your wishlist. Click to sign
-                in.
+                Log in to manage your ❤️ wishlist. Click to sign in.{" "}
               </p>
             </div>
-          )} */}
+          )}
         </div>
       </div>
     </div>

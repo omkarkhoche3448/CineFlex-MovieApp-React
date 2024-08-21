@@ -1,4 +1,3 @@
-// src/reducers/index.js
 import { combineReducers } from "@reduxjs/toolkit";
 import { movieReducer } from "../slices/movieSlice";
 import { personReducer } from "../slices/personSlice";

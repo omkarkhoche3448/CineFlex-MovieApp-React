@@ -6,8 +6,6 @@ const DropDown = ({ title, options, func, defaultValue }) => {
   const defaultOption = { id: "0", name: title };
   const [selected, setSelected] = useState(defaultValue || defaultOption);
 
-  console.log(defaultValue);
-
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 

@@ -1,4 +1,3 @@
-// Navbar.jsx
 import React, { useRef, useState } from "react";
 import logo from "../assets/movies-app.png";
 import { NavLink } from "react-router-dom";
@@ -28,8 +27,17 @@ import {
 const Navbar = () => {
   const [showOptions, setShowOptions] = useState(false);
   const optionsRef = useRef(null);
+  const { isSignedIn } = useUser();
 
   useOnClickOutside(optionsRef, () => setShowOptions(false));
+  const handleWishlistClick = () => {
+    if (isSignedIn) {
+      navigate("/wishlist");
+    } else {
+      navigate("/sign-in?redirectUrl=/wishlist");
+    }
+    setShowOptions(false);
+  };
   return (
     <div
       className={`flex items-center justify-evenly bg-transparent text-white`}
@@ -103,9 +111,9 @@ const Navbar = () => {
               </NavLink>
 
               <NavLink
-                to="/wishlist"
+                to={isSignedIn ? "/wishlist" : "/sign-in"}
                 className="flex items-center px-4 py-2 text-white hover:bg-gray-700 transition-colors duration-200 ease-in-out"
-                onClick={() => setShowOptions(false)}
+                onClick={handleWishlistClick}
               >
                 <FcLike className="h-6 w-6 mr-2" />
                 WishList
