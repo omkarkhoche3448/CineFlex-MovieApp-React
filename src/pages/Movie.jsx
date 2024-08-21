@@ -49,8 +49,6 @@ function Movie() {
       setMovies((prevMovies) => [...prevMovies, ...response.data.results]);
       setHasMore(response.data.page < response.data.total_pages);
       setLoading(false);
-
-      console.log("fetchMovies", response.data);
     } catch (error) {
       console.error("Failed to fetch movies", error);
       setLoading(false);
@@ -67,7 +65,6 @@ function Movie() {
       });
 
       setGenres(response.data.genres);
-      console.log("fetchGenres", response.data);
     } catch (error) {
       console.error("Failed to fetch genres", error);
     }

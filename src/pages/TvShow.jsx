@@ -48,8 +48,6 @@ function TvShow() {
       setShows((prevShows) => [...prevShows, ...response.data.results]);
       setHasMore(response.data.page < response.data.total_pages);
       setLoading(false);
-
-      console.log("fetchTvShows", response.data);
     } catch (error) {
       console.error("Failed to fetch TV shows", error);
       setLoading(false);
@@ -66,7 +64,6 @@ function TvShow() {
       });
 
       setGenres(response.data.genres);
-      console.log("fetchGenres", response.data);
     } catch (error) {
       console.error("Failed to fetch genres", error);
     }

@@ -1,10 +1,23 @@
 import React from "react";
 import { SignIn } from "@clerk/clerk-react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { HiArrowLeft } from "react-icons/hi"; // Importing an icon
 import backgroundImage from "../assets/SignInBG.jpg";
-import { NavLink } from "react-router-dom";
 
 const SignInPage = () => {
-  document.title = "CineFlex | SignIn";
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const redirectUrl =
+    new URLSearchParams(location.search).get("redirectUrl") || "/";
+
+  const handleSignInSuccess = () => {
+    navigate(redirectUrl);
+  };
+
+  const handleGoBack = () => {
+    navigate(-1);
+  };
 
   return (
     <div
@@ -16,16 +29,21 @@ const SignInPage = () => {
       }}
     >
       <div className="absolute top-[15%] lg:left-[7.3%] lg:bottom-[7%] items-center p-8">
-        <div className="absolute top-[6.5%] md:top-[7%] lg:py-1 box-border lg:top-[7%] left-[8%] z-30 ">
-          <NavLink
-            to={`/`}
-            className="text-white bg-gray-800 px-2 py-2 rounded-lg shadow-md 
-            hover:bg-gray-900 hover:shadow-lg transition duration-300 ease-in-out"
+        <div className="absolute top-[6.5%] md:top-[7%] lg:py-1 box-border lg:top-[7%] left-[8%] z-30">
+          <div
+            onClick={handleGoBack}
+            className="flex items-center text-black bg-transparent px-3 py-2 cursor-pointer relative group"
           >
-            Back
-          </NavLink>
+            <HiArrowLeft className="mr-2 text-2xl" />
+            <span className="absolute bottom-full bg-opacity-80 left-12 transform -translate-x-1/2 bg-black/80 text-white text-sm rounded-lg px-4 py-2 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              Go Back
+            </span>
+          </div>
         </div>
-        <SignIn />
+        <SignIn
+          signInButtonText="Sign In"
+          onSignInSuccess={handleSignInSuccess}
+        />
       </div>
     </div>
   );

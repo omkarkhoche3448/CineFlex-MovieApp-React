@@ -93,7 +93,7 @@ function Tvdetails() {
           ></div>
 
           <div
-            className="absolute inset-x-0 -top-[24%] h-[33vh] lg:bottom-[90%] md:h-[40vh] lg:h-[75vh] lg:hidden md:hidden block
+            className="absolute inset-x-0 -top-[24%] h-[50vh] lg:bottom-[90%] md:h-[40vh] lg:h-[75vh] lg:hidden md:hidden block
               bg-gradient-to-t from-black via-black/80 to-transparent z-10 pointer-events-none"
           ></div>
 

@@ -111,18 +111,18 @@ export default {
         900: "#251400",
       },
       red: {
-        5: "#ffe5e5",  // Lightest shade (almost white)
-        25: "#fcc8c8",  // Lighter shade
-        50: "#faa3a3",  // Light shade
-        100: "#f07878",  // Medium shade
-        200: "#d95b43",  // Darker shade
-        300: "#c23e14",  // Dark shade
-        400: "#a02000",  // Very dark shade
-        500: "#800000",  // Darkest shade (pure black)
-        600: "#660000",  // Even darker shade (optional)
-        700: "#4c0000",  // Even darker shade (optional)
-        800: "#330000",  // Even darker shade (optional)
-        900: "#1a0000",  // Darkest red (almost black)
+        5: "#ffe5e5", 
+        25: "#fcc8c8", 
+        50: "#faa3a3",  
+        100: "#f07878",  
+        200: "#d95b43", 
+        300: "#c23e14",  
+        400: "#a02000", 
+        500: "#800000", 
+        600: "#660000",  
+        700: "#4c0000", 
+        800: "#330000",  
+        900: "#1a0000",  
       },
       gray: {
         50: '#f9fafb',
@@ -134,7 +134,7 @@ export default {
         600: '#4b5563',
         700: '#374151',
         800: '#1f2937',
-        850: '#1a202e', // Custom gray shade
+        850: '#1a202e', 
         900: '#111827',
       },
       violet: {
@@ -147,8 +147,8 @@ export default {
         600: '#7c3aed',
         700: '#6d28d9',
         800: '#5b21b6',
-        850: '#4c1d95', // Custom violet shade
-        900: '#3f0f8a', // Custom violet shade
+        850: '#4c1d95', 
+        900: '#3f0f8a', 
       },
       "pure-greys": {
         5: "#F9F9F9",

@@ -159,7 +159,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="w-full flex items-center md:mt-[10%] gap-4">
+        <div className="w-full flex items-center mt-[5%] lg:mt-0 md:mt-[10%] gap-4">
           <button
             className="flex pointer-events-auto text-black bg-white text-base lg:text-lg font-bold px-4 py-2 md:px-6 md:py-3 rounded-lg hover:bg-opacity-80 border-none transition duration-200 ease-in-out"
             onClick={() =>
