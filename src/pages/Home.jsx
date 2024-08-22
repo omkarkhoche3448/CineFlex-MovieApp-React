@@ -12,13 +12,14 @@ import HorizontalCards from "../components/HorizontalCards";
 import HighlightText from "../components/common/HighlightText";
 import Footer from "../components/common/Footer";
 import Tutorial from "../components/common/Tutorial";
+import HomeCardDetails from "../components/common/HomeCardDetails";
 
 const Home = () => {
   document.title = "CineFlex | Home";
 
   const [wallpapers, setWallpapers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [currentWallpaper, setCurrentWallpaper] = useState(0);
+  const [currentWallpaperIndex, setCurrentWallpaperIndex] = useState(0);
   const [titleImage, setTitleImage] = useState(null);
   const [trending, setTrending] = useState(null);
   const [upcoming, setUpcoming] = useState([]);
@@ -54,7 +55,7 @@ const Home = () => {
     if (wallpapers.length === 0) {
       getNowPlayingWallpapers();
     }
-  }, []);
+  }, [wallpapers]);
 
   useEffect(() => {
     const getTrending = async () => {
@@ -91,8 +92,9 @@ const Home = () => {
   }, []);
 
   const handleSlideChange = async (swiper) => {
-    setCurrentWallpaper(swiper.realIndex);
-    const newTitleImage = await getTitleImage(wallpapers[swiper.realIndex].id);
+    const newIndex = swiper.realIndex;
+    setCurrentWallpaperIndex(newIndex);
+    const newTitleImage = await getTitleImage(wallpapers[newIndex].id);
     setTitleImage(newTitleImage);
   };
 
@@ -134,53 +136,11 @@ const Home = () => {
       bg-gradient-to-t from-black via-black/70 to-transparent z-10 pointer-events-none 
       "
       ></div>
-
-      <div
-        className="absolute lg:top-[8%] md:top-[7%] w-full lg:w-[22%] h-[40vh] top-[40vh] 
-          sm:top-[40vh] lg:left-[25vh] z-10 px-4 lg:px-0 pointer-events-none"
-      >
-        <div className=" items-center h-full flex flex-col justify-center space-y-4 md:justify-between lg:justify-between lg:mb-4">
-          {titleImage ? (
-            <img
-              src={titleImage}
-              loading="lazy"
-              className="w-full pointer-events-none md:pointer-events-auto lg:pointer-events-auto h-[60%] md:h-[60%] lg:h-[60%] mb-2 object-contain scale-100 transition-all duration-300 hover:scale-105"
-            />
-          ) : (
-            <h1 className="text-white tracking-widest font-extrabold text-5xl md:text-4xl lg:text-5xl transition-all duration-300 hover:scale-105 ">
-              {wallpapers[currentWallpaper]?.title}
-            </h1>
-          )}
-
-          <div className="flex flex-col gap-4 ">
-            <p className="text-gray-200 text-sm font-medium md:text-base lg:text-base mb-2">
-              {wallpapers[currentWallpaper]?.overview.slice(0, 150)}
-            </p>
-          </div>
-        </div>
-
-        <div className="w-full flex items-center mt-[5%] lg:mt-0 md:mt-[10%] gap-4">
-          <button
-            className="flex pointer-events-auto text-black bg-white text-base lg:text-lg font-bold px-4 py-2 md:px-6 md:py-3 rounded-lg hover:bg-opacity-80 border-none transition duration-200 ease-in-out"
-            onClick={() =>
-              navigate(
-                `movie/details/${wallpapers[currentWallpaper].id}/trailer`
-              )
-            }
-          >
-            <FaPlay className="mr-2 mt-1" />
-            Play
-          </button>
-          <Link
-            to={`movie/details/${wallpapers[currentWallpaper].id}`}
-            className="flex pointer-events-auto items-center text-gray-200 bg-transparent border border-white
-             text-base lg:text-lg font-bold hover:bg-white hover:text-white hover:bg-opacity-20 px-4 py-2 md:px-6 md:py-3 rounded-lg transition duration-200 ease-in-out whitespace-nowrap"
-          >
-            <AiOutlineInfoCircle className="mr-2" />
-            More Info
-          </Link>
-        </div>
-      </div>
+      <HomeCardDetails
+        titleImage={titleImage}
+        currentWallpaper={wallpapers[currentWallpaperIndex]}
+        navigate={navigate}
+      />
 
       <div className="relative w-full z-30 mt-9 md:mt-[70px] lg:-mt-[55px] ">
         <div className="flex flex-col items-center space-y-4">

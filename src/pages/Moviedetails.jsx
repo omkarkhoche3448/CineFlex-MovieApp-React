@@ -4,9 +4,10 @@ import { asyncloadmovie, removeMovie } from "../services/movieAction";
 import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import HorizontalCards from "../components/HorizontalCards";
 import HighlightText from "../components/common/HighlightText";
-import CardDetails from "../components/common/CardDetails";
+import { FaPlay, FaStar } from "react-icons/fa";
 import Cast from "../components/common/Cast";
-import axios from "../utils/axios";
+import { getTitleImage } from "../utils/imageHelpers";
+import CardDetails from "../components/common/CardDetails";
 
 function Moviedetails() {
   document.title = "CineFlex | Movie Details";
@@ -19,33 +20,21 @@ function Moviedetails() {
 
   useEffect(() => {
     dispatch(asyncloadmovie(id));
-
     return () => {
       dispatch(removeMovie());
     };
   }, [id, dispatch]);
 
   const [titleImage, setTitleImage] = useState(null);
-  const getTitleImage = async () => {
-    try {
-      const { data } = await axios.get(`/movie/${id}/images`);
-      const images = data.logos || data.posters || data.backdrops;
-      const titleImg =
-        images.find((image) => image.iso_639_1 === "en") || images[0];
-      setTitleImage(`https://image.tmdb.org/t/p/original${titleImg.file_path}`);
-    } catch (error) {
-      console.log("Error: ", error);
-      setTitleImage(null);
-    }
-  };
 
   useEffect(() => {
-    getTitleImage();
+    const fetchTitleImage = async () => {
+      const img = await getTitleImage(id, "movie");
+      setTitleImage(img);
+    };
 
-    if (info && info.detail) {
-      getTitleImage();
-    }
-  }, [id, info]);
+    fetchTitleImage();
+  }, [id]);
 
   if (!info) {
     return (
@@ -67,10 +56,10 @@ function Moviedetails() {
       }}
       className="relative max-w-full min-h-screen h-fit object-cover filter brightness-56"
     >
-      <div className="w-full h-screen lg:h-[90vh] mx-auto flex flex-col mt-28">
-        <div className="w-[80%] mx-auto flex flex-col lg:flex-row justify-center mt-28 lg:space-y-0 lg:space-x-44">
+      <div className="w-full h-screen lg:h-[90vh] mx-auto flex flex-col mt-32">
+        <div className="w-[80%] mx-auto flex flex-col lg:flex-row justify-center mt-32 lg:space-y-0 lg:space-x-44">
           <img
-            className="shadow-[8px_17px_38px_2px_rgba(0,0,0,.5)] h-[50vh] lg:h-[50vh] object-cover rounded-md static z-20 mb-5 lg:mb-0"
+            className="shadow-[8px_17px_38px_2px_rgba(0,0,0,.5)] h-[50vh] lg:h-[50vh] object-contain rounded-md static z-20 mb-5 lg:mb-0"
             src={`https://image.tmdb.org/t/p/original/${
               info.detail.poster_path || info.detail.backdrop_path
             }`}
@@ -81,15 +70,26 @@ function Moviedetails() {
           <CardDetails
             info={info}
             titleImage={titleImage}
-            navigate={navigate}
             pathname={pathname}
+            navigate={navigate}
           />
         </div>
 
-        <div className="relative w-full md:mt-[70px] bg-black">
-          <div className="absolute inset-x-0 lg:bottom-[90%] md:h-[40vh] lg:h-[75vh] lg:block md:block hidden bg-gradient-to-t from-black via-black/70 to-transparent z-10 pointer-events-none"></div>
-          <div className="absolute inset-x-0 -top-[15%] h-[44vh] lg:hidden md:hidden block bg-gradient-to-t from-black via-black to-transparent z-10 pointer-events-none"></div>
-          <div className="max-w-[100%] flex flex-col items-center space-y-4">
+        <div className="relative w-full mt-9 md:mt-[70px] bg-black">
+          <div
+            className="absolute inset-x-0 lg:bottom-[90%] md:h-[40vh] lg:h-[75vh] lg:block md:block hidden
+              bg-gradient-to-t from-black via-black/70 to-transparent z-10 pointer-events-none"
+          ></div>
+          <div
+            className="absolute inset-x-0 -top-[20%] h-[50vh] lg:bottom-[90%] md:h-[40vh] lg:h-[75vh] lg:hidden md:hidden block
+              bg-gradient-to-t from-black via-black/80 to-transparent z-10 pointer-events-none"
+          ></div>
+          <div
+            className="absolute inset-x-0 -top-[24%] h-[50vh] lg:bottom-[90%] md:h-[40vh] lg:h-[75vh] lg:hidden md:hidden block
+              bg-gradient-to-t from-black via-black/80 to-transparent z-10 pointer-events-none"
+          ></div>
+
+          <div className="flex flex-col items-center space-y-4">
             {info.recommendations.length > 0 && (
               <div className="max-w-[80%] flex flex-col z-30 space-y-3 mt-10">
                 <HighlightText
@@ -107,7 +107,8 @@ function Moviedetails() {
               </div>
             )}
           </div>
-          <div className="relative max-w-maxContent mx-auto p-5 lg:px-0">
+
+          <div className="relative max-w-maxContent mx-auto px-5 lg:px-0">
             <Cast cast={info.cast} createdBy={info.detail.created_by} />
           </div>
         </div>
