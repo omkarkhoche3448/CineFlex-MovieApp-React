@@ -32,25 +32,30 @@ function WishList() {
           </span>
         </div>
       </div>
-      <div className="w-[78%] mt-4">
+
+      <div className="w-[80%] mt-4 flex flex-col md:flex-row flex-wrap items-center gap-4 px-4">
         {wishlist.length > 0 ? (
           wishlist.map((item) => (
-            <WishListCard
+            <div
+              className=" flex justify-start flex-1 min-h-[250px] min-w-[200px] max-w-[250px]"
               key={item.id}
-              item={item}
-              handleRemove={() => handleRemoveFromWishlist(item.id)}
-            />
+            >
+              <WishListCard
+                item={item}
+                handleRemove={() => handleRemoveFromWishlist(item.id)}
+              />
+            </div>
           ))
         ) : (
-          <div className="flex flex-col items-center justify-center h-full gap-2 mt-16">
+          <div className="w-full flex flex-col items-center justify-center h-full gap-2 mt-16">
             <img
               src={Img}
               alt="Add to wishlist"
               width="100"
               height="100"
-              className=" rounded-full"
+              className="rounded-full"
             />
-            <p className="font-bold ">Your wishlist is empty.</p>
+            <p className="font-bold text-white">Your wishlist is empty.</p>
           </div>
         )}
       </div>
