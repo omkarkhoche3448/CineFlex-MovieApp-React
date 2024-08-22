@@ -6,11 +6,11 @@ import HorizontalCards from "../components/HorizontalCards";
 import HighlightText from "../components/common/HighlightText";
 import { FaPlay, FaStar } from "react-icons/fa";
 import Cast from "../components/common/Cast";
-import axios from "../utils/axios";
+import { getTitleImage } from "../utils/imageHelpers";
 import CardDetails from "../components/common/CardDetails";
 
 function Tvdetails() {
-  document.title = "CineFlex | Tv Details ";
+  document.title = "CineFlex | TV Details";
 
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -26,26 +26,15 @@ function Tvdetails() {
   }, [id, dispatch]);
 
   const [titleImage, setTitleImage] = useState(null);
+
   useEffect(() => {
-    const getTitleImage = async () => {
-      try {
-        const { data } = await axios.get(`/tv/${id}/images`);
-        const images = data.logos || data.posters || data.backdrops;
-        const titleImg =
-          images.find((image) => image.iso_639_1 === "en") || images[0];
-        setTitleImage(
-          `https://image.tmdb.org/t/p/original${titleImg.file_path}`
-        );
-      } catch (error) {
-        console.log("Error: ", error);
-        setTitleImage(null);
-      }
+    const fetchTitleImage = async () => {
+      const img = await getTitleImage(id, "tv");
+      setTitleImage(img);
     };
 
-    if (info && info.detail) {
-      getTitleImage();
-    }
-  }, [id, info]);
+    fetchTitleImage();
+  }, [id]);
 
   if (!info) {
     return (
@@ -74,7 +63,7 @@ function Tvdetails() {
             src={`https://image.tmdb.org/t/p/original/${
               info.detail.poster_path || info.detail.backdrop_path
             }`}
-            alt={info.detail.title || "Tv Poster"}
+            alt={info.detail.title || "TV Poster"}
             loading="lazy"
           />
 

@@ -28,8 +28,9 @@ import {
 const Navbar = () => {
   const [showOptions, setShowOptions] = useState(false);
   const [hoveredIcon, setHoveredIcon] = useState(null);
-  const optionsRef = useRef(null);
+
   const { isSignedIn } = useUser();
+  const optionsRef = useRef(null);
   const navigate = useNavigate();
 
   useOnClickOutside(optionsRef, () => setShowOptions(false));
@@ -54,7 +55,7 @@ const Navbar = () => {
             <img
               src={logo}
               alt="Logo"
-              className="h-8 w-8 md:h-11 md:w-11"
+              className="h-8 w-8 md:h-11 md:w-11 mb-3"
               loading="lazy"
             />
             <h1 className="text-xl md:text-3xl bg-gradient-to-r from-[#FBBF24] to-[#60A5FA] bg-clip-text text-transparent font-extrabold">
