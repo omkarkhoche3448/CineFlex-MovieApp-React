@@ -133,47 +133,42 @@ const Home = () => {
 
       <div
         className="absolute inset-x-0 lg:bottom-[65%] md:h-[40vh] lg:h-[75vh] 
-      bg-gradient-to-t from-black via-black/70 to-transparent z-10 pointer-events-none"
+      bg-gradient-to-t from-black via-black/70 to-transparent z-10 pointer-events-none 
+      "
       ></div>
-      
       <HomeCardDetails
         titleImage={titleImage}
         currentWallpaper={wallpapers[currentWallpaperIndex]}
         navigate={navigate}
       />
 
-      {/* Trending Content */}
-      <div className="relative w-full z-30 mt-9 md:mt-[70px] lg:-mt-[55px]">
-        <div className="flex flex-col items-center px-5 lg:px-0 space-y-6">
-          {/* Trending Section */}
+      <div className="relative w-full z-30 mt-9 md:mt-[70px] lg:-mt-[55px] ">
+        <div className="flex flex-col items-center space-y-4">
           <div className="w-[80%] flex flex-col">
             <HighlightText
               text={"What's Trending Today"}
-              customeClass={"ml-5 text-2xl lg:text-3xl"}
+              customeClass={"ml-3 text-2xl lg:text-3xl"}
             />
             <HorizontalCards data={trending} title={"movie"} />
           </div>
 
-          {/* Top Rated Section */}
           <div className="w-[80%] flex flex-col">
             <HighlightText
               text={"Top Rated Movies"}
-              customeClass={"ml-5 text-2xl lg:text-3xl"}
+              customeClass={"ml-3 text-2xl lg:text-3xl"}
             />
             <HorizontalCards data={topRated} title={"movie"} />
           </div>
 
-          {/* Upcoming Section */}
           <div className="w-[80%] flex flex-col">
             <HighlightText
               text={"Upcoming Movies"}
-              customeClass={"ml-5 text-2xl lg:text-3xl"}
+              customeClass={"ml-3 text-2xl lg:text-3xl"}
             />
             <HorizontalCards data={upcoming} title={"movie"} />
           </div>
         </div>
       </div>
-
       <Footer />
     </div>
   ) : (
