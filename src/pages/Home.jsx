@@ -11,17 +11,20 @@ import { AiOutlineInfoCircle } from "react-icons/ai";
 import HorizontalCards from "../components/HorizontalCards";
 import HighlightText from "../components/common/HighlightText";
 import Footer from "../components/common/Footer";
+import Tutorial from "../components/common/Tutorial";
+import HomeCardDetails from "../components/common/HomeCardDetails";
 
 const Home = () => {
-  document.title = "MovieApp | Home";
+  document.title = "CineFlex | Home";
 
   const [wallpapers, setWallpapers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [currentWallpaper, setCurrentWallpaper] = useState(0);
+  const [currentWallpaperIndex, setCurrentWallpaperIndex] = useState(0);
   const [titleImage, setTitleImage] = useState(null);
   const [trending, setTrending] = useState(null);
   const [upcoming, setUpcoming] = useState([]);
   const [topRated, setTopRated] = useState([]);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const getNowPlayingWallpapers = async () => {
@@ -39,7 +42,8 @@ const Home = () => {
     try {
       const { data } = await axios.get(`/movie/${movieId}/images`);
       const images = data.logos || data.posters || data.backdrops;
-      const titleImg = images.find(image => image.iso_639_1 === 'en') || images[0];
+      const titleImg =
+        images.find((image) => image.iso_639_1 === "en") || images[0];
       return `https://image.tmdb.org/t/p/original${titleImg.file_path}`;
     } catch (error) {
       console.log("Error: ", error);
@@ -51,7 +55,7 @@ const Home = () => {
     if (wallpapers.length === 0) {
       getNowPlayingWallpapers();
     }
-  }, []);
+  }, [wallpapers]);
 
   useEffect(() => {
     const getTrending = async () => {
@@ -88,17 +92,24 @@ const Home = () => {
   }, []);
 
   const handleSlideChange = async (swiper) => {
-    setCurrentWallpaper(swiper.realIndex);
-    const newTitleImage = await getTitleImage(wallpapers[swiper.realIndex].id);
+    const newIndex = swiper.realIndex;
+    setCurrentWallpaperIndex(newIndex);
+    const newTitleImage = await getTitleImage(wallpapers[newIndex].id);
     setTitleImage(newTitleImage);
   };
 
   return !loading && wallpapers.length > 0 && trending ? (
     <div className="relative min-h-screen">
+      {error && <p className="text-red-500">{error}</p>}
+      <Tutorial />
 
       {/* Swiper Container */}
       <Swiper
         modules={[Autoplay]}
+        autoplay={{
+          delay: 8000,
+          disableOnInteraction: true,
+        }}
         loop
         onSlideChange={handleSlideChange}
         speed={300}
@@ -107,7 +118,6 @@ const Home = () => {
         {wallpapers.map((wallpaper, index) => (
           <SwiperSlide key={index}>
             <div className="swiper-slide w-full h-screen lg:h-[90vh] relative">
-
               <div
                 className="w-full h-full object-cover filter brightness-56"
                 style={{
@@ -121,63 +131,19 @@ const Home = () => {
         ))}
       </Swiper>
 
-      {/* Gradient Overlay */}
       <div
         className="absolute inset-x-0 lg:bottom-[65%] md:h-[40vh] lg:h-[75vh] 
       bg-gradient-to-t from-black via-black/70 to-transparent z-10 pointer-events-none"
-      >
-      </div>
-
-      {/* Movie Details card */}
-      <div
-        className="absolute lg:top-[8%] md:top-[7%] w-full lg:w-[25%] h-[40vh] top-[40vh] 
-          sm:top-[40vh] lg:left-[25vh] z-10 "
-      >
-        <div className=" items-center h-full flex flex-col justify-between mb-4">
-
-          {titleImage ? (
-            <img
-              src={titleImage}
-              loading="lazy"
-              className="w-full lg:h-[50%] mb-2 object-contain scale-95 transition-all duration-300 hover:scale-105"
-            />
-          ) : (
-            <h1 className="text-white text-2xl md:text-4xl lg:text-5xl font-bold ">
-              {wallpapers[currentWallpaper]?.title}
-            </h1>
-          )}
-
-          <div className="flex flex-col gap-4">
-            <p className="text-gray-200 text-sm font-medium md:text-base lg:text-base mb-2">
-              {wallpapers[currentWallpaper]?.overview.slice(0, 150)}
-            </p>
-            <p className="text-gray-200 text-xs md:text-sm lg:text-sm ">
-              Release Date: {wallpapers[currentWallpaper]?.release_date}
-            </p>
-          </div>
-        </div>
-        <div className="w-full flex gap-4">
-          <button
-            className="flex text-black bg-white text-base lg:text-lg font-bold px-4 py-2 md:px-6 md:py-3 rounded-lg hover:bg-opacity-80 border-none transition duration-200 ease-in-out"
-            onClick={() =>
-              navigate(`movie/details/${wallpapers[currentWallpaper].id}/trailer`)
-            }
-          >
-            <FaPlay className="mr-2 mt-1" />
-            Play
-          </button>
-          <Link
-            to={`movie/details/${wallpapers[currentWallpaper].id}`}
-            className="flex items-center text-gray-200 bg-transparent border border-white text-base lg:text-lg font-bold hover:bg-white hover:text-black hover:bg-opacity-20 px-4 py-2 md:px-6 md:py-3 rounded-lg transition duration-200 ease-in-out"
-          >
-            <AiOutlineInfoCircle className="mr-2" />
-            More Info
-          </Link>
-        </div>
-      </div>
+      ></div>
+      
+      <HomeCardDetails
+        titleImage={titleImage}
+        currentWallpaper={wallpapers[currentWallpaperIndex]}
+        navigate={navigate}
+      />
 
       {/* Trending Content */}
-      <div className="relative w-full z-30 mt-9 md:mt-[70px] lg:-mt-[px] ">
+      <div className="relative w-full z-30 mt-9 md:mt-[70px] lg:-mt-[55px]">
         <div className="flex flex-col items-center px-5 lg:px-0 space-y-6">
           {/* Trending Section */}
           <div className="w-[80%] flex flex-col">

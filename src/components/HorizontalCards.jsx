@@ -1,49 +1,91 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import playIcon from "../assets/icon-play.png";
 import noimage from "../assets/noimage.jpeg";
-import HighlightText from "./common/HighlightText";
+import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 
 const HorizontalCards = ({ data, title }) => {
-  return (
-    <div className="inline-flex  justify-between overflow-x-auto overflow-y-hidden scrollbar-hide p-5 space-x-3">
-      {data.length > 0 ? (
-        data.map((d, i) => (
-          <Link
-            to={`/${d.media_type || title}/details/${d.id}`}
-            key={i}
-            className="min-w-[90%] sm:min-w-[80%] md:min-w-[60%] lg:min-w-[20%] xl:min-w-[14.28%] h-[25vh] sm:h-[30vh] md:h-[35vh] lg:h-[40vh] xl:h-[45vh] mb-5"
-          >
-            <div className="relative group h-[70%] md:h-[75%] lg:h-[80%] mb-2 transform transition-transform duration-300 hover:scale-105">
-              <img
-                className="w-full h-full object-cover rounded-md"
-                src={
-                  d.backdrop_path || d.poster_path
-                    ? `https://image.tmdb.org/t/p/original${d.backdrop_path || d.poster_path}`
-                    : noimage
-                }
-                alt=""
-              />
-              <div
-                className="absolute inset-0 flex items-center justify-center 
-                opacity-0 group-hover:opacity-100 transition-opacity duration-400 bg-gray-900 bg-opacity-60"
-              >
-                <img src={playIcon} alt="Play Icon" className="h-10 w-10" />
-              </div>
-            </div>
+  const scrollRef = useRef(null);
 
-            <div className="text-white p-3 h-full md:h-[25%] lg:h-[20%]">
-              <h1 className="text-sm sm:text-base md:text-lg lg:text-xl font-semibold">
-                {d.name || d.title || d.original_name || d.original_title}
-              </h1>
-            </div>
-          </Link>
-        ))
-      ) : (
-        <h1 className="text-3xl mt-5 text-white font-black text-center">
-          Nothing to show
-        </h1>
-      )}
+  const handleScroll = (direction) => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({
+        left: direction === "left" ? -1000 : 1000,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  return (
+    <div className="relative overflow-hidden">
+      <div className="relative flex items-center">
+        <div
+          className="absolute left-1 top-0 bottom-0 flex items-center justify-center w-12 cursor-pointer hover:bg-black hover:bg-opacity-20 z-10"
+          onClick={() => handleScroll("left")}
+        >
+          <SlArrowLeft size={30} />
+        </div>
+
+        <div
+          className="flex justify-start overflow-x-auto overflow-y-hidden scrollbar-hide p-5 space-x-3"
+          ref={scrollRef}
+        >
+          {data.length > 0 ? (
+            data.map((d, i) => (
+              <Link
+                to={`/${d.media_type || title}/details/${d.id}`}
+                key={i}
+                className="min-w-[75%] h-[50vh] sm:min-w-[60%] md:min-w-[30%] lg:min-w-[15%] lg:h-[45vh]"
+              >
+                <div className="relative group h-[70%] md:h-[75%] lg:h-[80%] mb-2 transform transition-transform duration-300 hover:scale-105">
+                  <img
+                    className="w-full h-full object-cover rounded-md"
+                    loading="lazy"
+                    src={
+                      d.poster_path || d.backdrop_path
+                        ? `https://image.tmdb.org/t/p/original${
+                            d.poster_path || d.backdrop_path
+                          }`
+                        : noimage
+                    }
+                    alt={
+                      d.name || d.title || d.original_name || d.original_title
+                    }
+                  />
+                  <div
+                    className="absolute inset-0 flex items-center justify-center opacity-0 
+                    group-hover:opacity-100 transition-opacity duration-400 bg-gray-900 bg-opacity-60"
+                  >
+                    <img
+                      src={playIcon}
+                      alt="Play Icon"
+                      className="h-10 w-10"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+
+                <div className="text-white p-3 h-[30%] md:h-[25%] lg:h-[20%] flex items-center">
+                  <p className="font-semibold leading-tight text-sm lg:text-xs truncate">
+                    {d.name || d.title || d.original_name || d.original_title}
+                  </p>
+                </div>
+              </Link>
+            ))
+          ) : (
+            <p className="text-white p-3">
+              {`No ${title.charAt(0).toUpperCase() + title.slice(1)} Found.`}
+            </p>
+          )}
+        </div>
+
+        <div
+          className="absolute right-1 top-0 bottom-0 flex items-center justify-center w-12 cursor-pointer hover:bg-black hover:bg-opacity-20 z-10"
+          onClick={() => handleScroll("right")}
+        >
+          <SlArrowRight size={30} />
+        </div>
+      </div>
     </div>
   );
 };
