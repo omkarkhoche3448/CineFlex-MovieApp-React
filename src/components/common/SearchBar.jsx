@@ -32,15 +32,14 @@ const SearchBar = ({ query, setQuery, setSearchResults }) => {
   }, [query]);
 
   return (
-    <div className="relative flex flex-col items-center w-fit lg:max-w-2xl lg:mx-auto">
-      <div className="relative w-fit">
+    <div className="relative w-full lg:max-w-2xl mx-auto">
+      <div className="relative">
         <input
           onChange={(e) => setQuery(e.target.value)}
           value={query}
           type="text"
           placeholder="Search Anything"
-          className=" left-0 w-full p-3 text-xl outline-none border border-gray-600 rounded-md bg-gray-800
-           text-white transition-all duration-300"
+          className="w-full p-3 text-xl outline-none border border-gray-600 rounded-md bg-gray-800 text-white transition-all duration-300"
         />
         {query.length > 0 && (
           <IoIosClose
@@ -51,7 +50,7 @@ const SearchBar = ({ query, setQuery, setSearchResults }) => {
       </div>
 
       {searches.length > 0 && (
-        <div className="absolute w-full max-h-60 mt-2 overflow-auto top-[100%] bg-gray-900 rounded-md shadow-lg z-10 border border-gray-600">
+        <div className="absolute w-full max-h-60 mt-2 overflow-auto top-full bg-gray-900 rounded-md shadow-lg z-10 border border-gray-600">
           {searches.map((s, i) => (
             <Link
               to={`/${s.media_type}/details/${s.id}`}
@@ -62,11 +61,14 @@ const SearchBar = ({ query, setQuery, setSearchResults }) => {
               <img
                 src={
                   s.backdrop_path || s.profile_path
-                    ? `https://image.tmdb.org/t/p/original/${s.backdrop_path || s.profile_path}`
+                    ? `https://image.tmdb.org/t/p/original/${
+                        s.backdrop_path || s.profile_path
+                      }`
                     : noimage
                 }
-                alt=""
+                alt={s.name || s.title || s.original_name || s.original_title}
                 className="h-16 w-16 object-cover rounded-sm mr-3"
+                loading="lazy"
               />
               <span className="text-white">
                 {s.name || s.title || s.original_name || s.original_title}

@@ -1,4 +1,3 @@
-// src/slices/tvSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {

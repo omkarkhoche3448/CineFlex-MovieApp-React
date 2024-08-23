@@ -1,4 +1,3 @@
-// NotFound.jsx
 import React from "react";
 import Lottie from "react-lottie";
 import animationData from "../assets/Animation - 1718171085008.json";
