@@ -66,21 +66,21 @@ const HorizontalCards = ({ data, title }) => {
                 </div>
 
                 <div className="text-white p-3 h-[30%] md:h-[25%] lg:h-[20%] flex items-center">
-                  <h1 className="text-sm sm:text-base md:text-lg lg:text-xl font-semibold leading-snug whitespace-normal line-clamp-3">
+                  <p className="font-semibold leading-tight text-sm lg:text-xs truncate">
                     {d.name || d.title || d.original_name || d.original_title}
-                  </h1>
+                  </p>
                 </div>
               </Link>
             ))
           ) : (
-            <h1 className="text-3xl mt-5 text-white font-black text-center">
-              Nothing to show
-            </h1>
+            <p className="text-white p-3">
+              {`No ${title.charAt(0).toUpperCase() + title.slice(1)} Found.`}
+            </p>
           )}
         </div>
 
         <div
-          className="absolute -right-2 top-0 bottom-0 flex items-center justify-center w-12 cursor-pointer hover:bg-black hover:bg-opacity-0 z-10"
+          className="absolute right-1 top-0 bottom-0 flex items-center justify-center w-12 cursor-pointer hover:bg-black hover:bg-opacity-20 z-10"
           onClick={() => handleScroll("right")}
         >
           <SlArrowRight size={30} />
