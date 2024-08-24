@@ -13,6 +13,7 @@ import HighlightText from "../components/common/HighlightText";
 import Footer from "../components/common/Footer";
 import Tutorial from "../components/common/Tutorial";
 import HomeCardDetails from "../components/common/HomeCardDetails";
+import { getTitleImage } from "../utils/imageHelpers";
 
 const Home = () => {
   document.title = "CineFlex | Home";
@@ -29,25 +30,18 @@ const Home = () => {
 
   const getNowPlayingWallpapers = async () => {
     try {
-      const { data } = await axios.get(`/movie/now_playing`);
+      const { data } = await axios.get(`/trending/all/week`);
       setWallpapers(data.results);
-      const firstTitleImg = await getTitleImage(data.results[0].id);
-      setTitleImage(firstTitleImg);
+      console.log(data.results);
+      if (data.results.length > 0) {
+        const firstTitleImg = await getTitleImage(
+          data.results[0].id,
+          data.results[0].media_type
+        );
+        setTitleImage(firstTitleImg);
+      }
     } catch (error) {
       console.log("Error: ", error);
-    }
-  };
-
-  const getTitleImage = async (movieId) => {
-    try {
-      const { data } = await axios.get(`/movie/${movieId}/images`);
-      const images = data.logos || data.posters || data.backdrops;
-      const titleImg =
-        images.find((image) => image.iso_639_1 === "en") || images[0];
-      return `https://image.tmdb.org/t/p/original${titleImg.file_path}`;
-    } catch (error) {
-      console.log("Error: ", error);
-      return null;
     }
   };
 
@@ -94,7 +88,12 @@ const Home = () => {
   const handleSlideChange = async (swiper) => {
     const newIndex = swiper.realIndex;
     setCurrentWallpaperIndex(newIndex);
-    const newTitleImage = await getTitleImage(wallpapers[newIndex].id);
+
+    const newWallpaper = wallpapers[newIndex];
+    const newTitleImage = await getTitleImage(
+      newWallpaper.id,
+      newWallpaper.media_type
+    );
     setTitleImage(newTitleImage);
   };
 

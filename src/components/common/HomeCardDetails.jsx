@@ -21,7 +21,9 @@ const HomeCardDetails = ({ titleImage, currentWallpaper, navigate }) => {
           />
         ) : (
           <h1 className="text-white tracking-widest font-extrabold text-5xl md:text-4xl lg:text-5xl transition-all duration-300 hover:scale-105 ">
-            {currentWallpaper?.title || "No title available"}
+            {currentWallpaper?.title ||
+              currentWallpaper?.name ||
+              "No title available"}
           </h1>
         )}
 
@@ -43,10 +45,10 @@ const HomeCardDetails = ({ titleImage, currentWallpaper, navigate }) => {
           Play
         </button>
         <Link
-          to={`movie/details/${currentWallpaper?.id}`}
+          to={`/${currentWallpaper?.media_type}/details/${currentWallpaper?.id}`}
           className="flex pointer-events-auto items-center text-gray-200 bg-transparent border border-white 
-          text-base lg:text-lg font-bold hover:bg-white hover:text-white hover:bg-opacity-20 px-4 py-2 md:px-6 md:py-3 rounded-lg 
-          ransition duration-200 ease-in-out whitespace-nowrap"
+  text-base lg:text-lg font-bold hover:bg-white hover:text-white hover:bg-opacity-20 px-4 py-2 md:px-6 md:py-3 rounded-lg 
+  transition duration-200 ease-in-out whitespace-nowrap"
         >
           <AiOutlineInfoCircle className="mr-2" />
           More Info
