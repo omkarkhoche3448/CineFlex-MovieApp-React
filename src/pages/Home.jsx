@@ -121,8 +121,16 @@ const Home = () => {
                 className="w-full h-full object-cover filter brightness-56"
                 style={{
                   backgroundImage: `url(https://image.tmdb.org/t/p/original${wallpaper.backdrop_path})`,
-                  backgroundPosition: "center top 10%",
+                  backgroundPosition: "center top 30%",
                   backgroundSize: "cover",
+                  opacity: "75%",
+                }}
+              ></div>
+              <div
+                className="absolute inset-0"
+                style={{
+                  background:
+                    "linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.2) 80%)",
                 }}
               ></div>
             </div>
@@ -132,7 +140,7 @@ const Home = () => {
 
       <div
         className="absolute inset-x-0 lg:bottom-[65%] md:h-[40vh] lg:h-[75vh] 
-      bg-gradient-to-t from-black via-black/70 to-transparent z-10 pointer-events-none 
+      bg-gradient-to-t from-black via-black/60 to-transparent z-10 pointer-events-none 
       "
       ></div>
       <HomeCardDetails
