@@ -2,7 +2,7 @@ import React from "react";
 import { SignIn } from "@clerk/clerk-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { HiArrowLeft } from "react-icons/hi"; // Importing an icon
-import backgroundImage from "../assets/SignInBG.jpg";
+import backgroundImage from "../assets/SignInBG.jpeg";
 
 const SignInPage = () => {
   const navigate = useNavigate();
