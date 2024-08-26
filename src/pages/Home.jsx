@@ -32,7 +32,6 @@ const Home = () => {
     try {
       const { data } = await axios.get(`/trending/all/week`);
       setWallpapers(data.results);
-      console.log(data.results);
       if (data.results.length > 0) {
         const firstTitleImg = await getTitleImage(
           data.results[0].id,
