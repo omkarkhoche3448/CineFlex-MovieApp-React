@@ -13,6 +13,7 @@ import Trailer from "./components/common/Trailer";
 import Tvdetails from "./pages/Tvdetails";
 import WishList from "./pages/WishList";
 import SignInPage from "./pages/SignInPage";
+import GptSearch from "./pages/GptSearch";
 
 function App() {
   return (
@@ -41,6 +42,16 @@ function App() {
             </SignedIn>
           }
         />
+
+        <Route
+          path="/gpt-search"
+          element={
+            <SignedIn>
+              <GptSearch />
+            </SignedIn>
+          }
+        />
+
         <Route
           path="/wishlist"
           element={
