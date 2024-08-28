@@ -41,7 +41,7 @@ function GptSearchBar() {
     setLoading(true);
 
     const gptQuery = `
-      Act as a movie recommendation system. For the search query "${SearchText.current.value}", provide a list of 5 movie names separated by commas. For example: "Inception, The Matrix, Interstellar, The Dark Knight, Memento". Do not include any explanations or additional text. Just list the movie names separated by commas.
+      Act as a movie recommendation system. For the search query "${SearchText.current.value}", provide a list of 10 movie names separated by commas. For example: "Inception, The Matrix, Interstellar, The Dark Knight, Memento,...". Do not include any explanations or additional text. Just list the movie names separated by commas.
     `;
 
     try {
