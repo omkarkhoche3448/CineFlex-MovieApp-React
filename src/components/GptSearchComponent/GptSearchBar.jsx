@@ -19,10 +19,10 @@ const searchMoviesTMDB = async (movieTitle) => {
         movieTitle
       )}`
     );
-    return data.results[0] || {}; // Return the first result or an empty object if none found
+    return data.results[0] || {};
   } catch (error) {
     console.error("Error fetching movie from TMDB:", error);
-    return {}; // Return an empty object in case of an error
+    return {};
   }
 };
 
