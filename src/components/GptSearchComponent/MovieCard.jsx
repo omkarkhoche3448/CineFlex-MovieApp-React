@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function MovieCard({ movie }) {
-  console.log(movie);
   const detailsLink = `/${movie.media_type || "movie"}/details/${movie.id}`;
   const title =
     movie.name || movie.title || movie.original_name || movie.original_title;
