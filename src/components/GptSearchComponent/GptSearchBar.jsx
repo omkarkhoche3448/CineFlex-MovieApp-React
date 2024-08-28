@@ -1,12 +1,11 @@
 import Groq from "groq-sdk";
 import React, { useRef, useState } from "react";
-import { GroqKey } from "../../utils/constant";
 import axios from "../../utils/axios";
 import { useDispatch } from "react-redux";
 import { addGptMovies } from "../../slices/gptSlice";
 
 const groq = new Groq({
-  apiKey: GroqKey,
+  apiKey: import.meta.env.VITE_GROQ_KEY,
   dangerouslyAllowBrowser: true,
 });
 
