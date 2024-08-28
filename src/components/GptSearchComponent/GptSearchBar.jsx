@@ -50,18 +50,15 @@ function GptSearchBar() {
         model: "llama3-8b-8192",
       });
 
-      // Convert response to array of movie titles
       const gptMovies =
         response.choices[0]?.message?.content
           .split(",")
           .map((title) => title.trim()) || [];
 
-      // Fetch movie details from TMDB
       const movieDetailsPromises = gptMovies.map((title) =>
         searchMoviesTMDB(title)
       );
       const movieDetails = await Promise.all(movieDetailsPromises);
-      console.log("Movie Details:", movieDetails);
 
       dispatch(
         addGptMovies({ movieNames: gptMovies, movieResults: movieDetails })
@@ -75,7 +72,7 @@ function GptSearchBar() {
   };
 
   return (
-    <div className="w-[78%] px-4 py-2 rounded-md mt-[9%] mx-auto">
+    <div className=" md:w-[80%] lg:w-[78%] px-4 py-2 rounded-md mt-[32%] md:mt-[12%] lg:mt-[9%] mx-auto">
       <form
         className="flex flex-row items-center w-full gap-4"
         onSubmit={(e) => e.preventDefault()}
@@ -88,8 +85,9 @@ function GptSearchBar() {
           id="search-input"
           type="text"
           placeholder="What would you like to do today?"
-          className="bg-gray-900 py-3 px-4 rounded-md w-full text-white focus:outline-none focus:ring-2 focus:ring-red-500"
+          className="bg-gray-900 py-2 px-3 md:py-3 md:px-4 rounded-md w-full text-white text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-red-500"
         />
+
         <button
           type="submit"
           onClick={handleGptSearch}
